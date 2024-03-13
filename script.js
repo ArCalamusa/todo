@@ -1,10 +1,11 @@
 // # OPERAZIONI DA FARE AD AVVIO PAGINA
 
 // Recupero gli elementi di interesse dalla pagina
-const button = document.querySelector('button');
+const addButton = document.querySelector('.addButton');
 const inputField = document.querySelector('input');
 const todoList = document.querySelector('.todo-list');
 const emptyListMessage = document.querySelector('.empty-list-message');
+const deleteButton = document.querySelector('.deleteButton');
 
 // Creo una chiave per il local storage
 const STORAGE_KEY = '__bool_todo__';
@@ -24,10 +25,16 @@ showContent();
 
 // # OPERAZIONI DINAMICHE 
 // Reagisco al click del bottone
-button.addEventListener('click', function () {
+addButton.addEventListener('click', function () {
     // Chiedo di aggiungre l'attività
     addActivity();
 });
+
+//bottone calcella e svuota local storage
+deleteButton.addEventListener('click', function () {
+    deleteItems();
+});
+
 
 // # FUNZIONI 
 
@@ -55,7 +62,7 @@ function showContent() {
     } else {
         // ALTRIMENTI
         // Mostra il messaggio di lista vuota
-        emptyListMessage.innerText = 'Sembra che non ci siano attività';
+        emptyListMessage.innerText = 'NON CI SONO CONVOCATI';
     }
 
 }
@@ -69,7 +76,12 @@ function makeCheckClickable() {
         // Aggiungi una reazione al click
         check.addEventListener('click', function () {
             // Rimuovi l'elemento dalla lista
-            activities.splice(index, 1);
+            var domanda = confirm("Sei sicuro di voler rimuovere il partecipante?");
+            if (domanda === true) {
+                activities.splice(index, 1);
+            } else {
+                alert('Operazione annullata');
+            }
 
             // Aggiorna anche il localStorage
             localStorage.setItem(STORAGE_KEY, JSON.stringify(activities));
@@ -80,7 +92,6 @@ function makeCheckClickable() {
     })
 
 }
-
 
 // Funzione per aggiungere un'attività
 function addActivity() {
@@ -110,9 +121,14 @@ function createActivityTemplate(activity) {
     return `
    <li class="todo-item">
      <div class="todo-check">
-       <ion-icon name="add-outline"></ion-icon>
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
      </div>
      <p class="todo-text">${activity}</p>
    </li>
    `;
+}
+
+//Funzione per svuotare il local storage
+function deleteItems() {
+    localStorage.clear();
 }
