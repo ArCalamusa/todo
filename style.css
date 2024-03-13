@@ -2,17 +2,17 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: "Inter", sans-serif;
 }
 
 body {
     padding: 16px;
     background-color: lightgreen;
+    font-family: "Inter", sans-serif;
 }
 
 .container {
     max-width: 540px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 header {
@@ -35,7 +35,6 @@ h1 {
     padding: 16px;
     border-radius: 16px;
     background-color: rgb(95, 198, 173);
-    display: flex;
 }
 
 input {
@@ -45,7 +44,7 @@ input {
     border: none;
     flex-grow: 1;
     /* prende tutto lo spazio */
-    margin-right: 5px;
+    /* margin-right: 5px; */
 }
 
 button {
@@ -65,7 +64,7 @@ button {
 .empty-list-message {
     text-align: center;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .todo-item {

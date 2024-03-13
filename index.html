@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODOLIST APP</title>
-    <!-- favicon -->
+    <!-- favicon boolean -->
     <link rel="icon"
         href="https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/681/original/Pittogramma-RGB-1080-BLUE-circle.png">
     <!-- collegamento css -->
@@ -23,48 +23,40 @@
 </head>
 
 <body>
-    <!-- intestazione -->
     <div class="container">
+        <!-- intestazione -->
         <header class="panel">
             <h1>TODOLIST APP</h1>
             <img src="https://lwfiles.mycourse.app/6368e5089f20781a7e4f1805-public/2c162927114072f9ebbf04043a593fb9.png"
                 alt="logo bolean">
         </header>
 
-        <!-- sezione principale -->
+        <!-- principale -->
         <main>
             <!-- messaggio non attivo -->
             <p class="empty-list-message">
-                Sembra non ci siano attività
+                <!-- creato dinamicamente con JS -->
             </p>
-            <!-- prima lista attività -->
+
+            <!-- lista attività -->
             <ul class="todo-list">
-                <li class="todo-item">
-                    <div class="todo-check">
-                        <ion-icon name="checkmark-outline"></ion-icon>
-                    </div>
-                </li>
+                <!-- creato dinamicamente con JS -->
             </ul>
-            <!-- seconda lista attività -->
-            <ul class="todo-list">
-                <li class="todo-item">
-                    <div class="todo-check">
-                        <ion-icon name="checkmark-outline"></ion-icon>
-                    </div>
-                </li>
-            </ul>
+
             <!-- pannello aggiunta attività -->
-            <div class="panel">
+            <div class="panel add-todo">
                 <input type="text" placeholder="inserisci l'attività">
                 <button>
                     <ion-icon name="add-outline"></ion-icon>
                 </button>
             </div>
+
+        </main>
     </div>
-    </main>
-    
-    <!-- collegamento file js -->
-    <script src="script.js"></script>
+
+    <!-- collegamento JS -->
+    <script type="text/javascript" src="script.js"></script>
+
 </body>
 
 </html>
