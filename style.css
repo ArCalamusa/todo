@@ -6,7 +6,7 @@
 
 body {
     padding: 16px;
-    background-color: lightgreen;
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(249,232,51,1) 0%, rgba(250,196,59,1) 100.2% );
     font-family: "Inter", sans-serif;
 }
 
@@ -23,7 +23,7 @@ header {
 }
 
 header>img {
-    width: 150px;
+    width: 35%;
 }
 
 h1 {
@@ -34,7 +34,7 @@ h1 {
 .panel {
     padding: 16px;
     border-radius: 16px;
-    background-color: rgb(95, 198, 173);
+    background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
 }
 
 input {
@@ -52,7 +52,8 @@ button {
     padding: 16px;
     border: none;
     border-radius: 10px;
-    background-color: rgb(217, 255, 102);
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(249,232,51,1) 0%, rgba(250,196,59,1) 100.2% );
+    background-repeat: repeat;
 }
 
 .add-todo {
@@ -76,12 +77,39 @@ button {
     border-radius: 16px;
 }
 
+/* Colore di sfondo più scuro al passaggio del mouse */
+.todo-item:hover {
+    background: #ddd;
+}
+
 .todo-text {
     padding: 16px;
+    text-transform: uppercase;
 }
 
 .todo-check {
     padding: 16px;
-    background-color: rgb(217, 255, 102);
+    background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
     border-radius: 16px 0 0 16px;
+    color: white;
+}
+
+/* Quando viene cliccato, aggiunge un colore di sfondo e barra il testo */
+.todo-item.checked {
+    background: #888;
+    color: #fff;
+    text-decoration: line-through;
+}
+
+@media screen and (max-width: 600px) {
+    .add-todo .panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    input {
+        width: 100%;
+        flex-grow: 1;
+    }
 }

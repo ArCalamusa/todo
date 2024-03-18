@@ -1,13 +1,14 @@
-// # OPERAZIONI DA FARE AD AVVIO PAGINA
-
+//! OPERAZIONI DA FARE AD AVVIO PAGINA
 // Recupero gli elementi di interesse dalla pagina
 const addButton = document.querySelector('.addButton');
 const inputField = document.querySelector('input');
 const todoList = document.querySelector('.todo-list');
 const emptyListMessage = document.querySelector('.empty-list-message');
 const deleteButton = document.querySelector('.deleteButton');
+const deleteAllButton = document.querySelector('.deleteAllButton');
+const list = document.querySelector('ul');
 
-// Creo una chiave per il local storage
+//! Creo una chiave per il local storage
 const STORAGE_KEY = '__bool_todo__';
 
 // Preparo una lista di attività
@@ -15,34 +16,41 @@ let activities = [];
 
 // Controllo se per caso c'erano delle attività nel local storage
 const storage = localStorage.getItem(STORAGE_KEY);
-
 if (storage) {
     activities = JSON.parse(storage);
 }
 
 // Chiedo a JS di decidere cosa mostrare
+checkedAttivity()
 showContent();
 
-// # OPERAZIONI DINAMICHE 
+
+//! OPERAZIONI DINAMICHE 
+
 // Reagisco al click del bottone
-addButton.addEventListener('click', function () {
+addButton.addEventListener('click', () => {
     // Chiedo di aggiungre l'attività
     addActivity();
+    
 });
 
-//bottone calcella e svuota local storage
-deleteButton.addEventListener('click', function () {
+// bottone calcella e svuota local storage
+deleteButton.addEventListener('click', () => {
     deleteItems();
 });
 
+//svuota la lista
+deleteAllButton.addEventListener('click', () => {
+    deleteAll();
+});
 
-// # FUNZIONI 
-
+//! FUNZIONI RICHIAMATE
 // Funzione che decide cosa mostrare in pagina
 function showContent() {
     // Innanzitutto pulisco tutto
     todoList.innerText = '';
     emptyListMessage.innerText = '';
+    
 
     if (activities.length > 0) {
         // Se c'è almeno una attività...
@@ -54,17 +62,17 @@ function showContent() {
             // Inseriscilo in pagina
             todoList.innerHTML += template;
         });
+        
 
         // Rendi cliccabili i check
         makeCheckClickable();
-
+        
 
     } else {
         // ALTRIMENTI
         // Mostra il messaggio di lista vuota
-        emptyListMessage.innerText = 'NON CI SONO CONVOCATI';
+        emptyListMessage.innerText = 'Non ci sono attività';
     }
-
 }
 
 // Funzione per rendere i check cliccabili
@@ -74,9 +82,9 @@ function makeCheckClickable() {
     // Per ognuno dei check...
     checks.forEach(function (check, index) {
         // Aggiungi una reazione al click
-        check.addEventListener('click', function () {
+        check.addEventListener('click', () => {
             // Rimuovi l'elemento dalla lista
-            var domanda = confirm("Sei sicuro di voler rimuovere il partecipante?");
+            let domanda = confirm("Sei sicuro di voler rimuovere il partecipante?");
             if (domanda === true) {
                 activities.splice(index, 1);
             } else {
@@ -90,7 +98,6 @@ function makeCheckClickable() {
             showContent();
         });
     })
-
 }
 
 // Funzione per aggiungere un'attività
@@ -121,7 +128,7 @@ function createActivityTemplate(activity) {
     return `
    <li class="todo-item">
      <div class="todo-check">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <i class="fa-solid fa-check"></i>
      </div>
      <p class="todo-text">${activity}</p>
    </li>
@@ -131,4 +138,30 @@ function createActivityTemplate(activity) {
 //Funzione per svuotare il local storage
 function deleteItems() {
     localStorage.clear();
+}
+
+//Funzione svuota lista
+function deleteAll() {
+    // Cerca tutti i check e fa' sì che siano cliccabili
+    const checks = document.querySelectorAll('.todo-check');
+    // Per ognuno dei check...
+    checks.forEach(function (check, index) {
+        // Svuota l'intero array
+        activities.splice(0, activities.length);
+
+        // Aggiorna anche il localStorage
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(activities));
+
+        // Aggiorna la lista in pagina
+        showContent();
+    })
+}
+
+// Funzione che spunta le attività
+function checkedAttivity() {
+    list.addEventListener('click', function (ev) {
+        if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+        }
+    }, false);
 }
